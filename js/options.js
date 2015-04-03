@@ -24,6 +24,12 @@ function addBlockSet()
 	urls = removeElementFromArray(null,urls);
 	urls = removeElementFromArray("",urls);
 
+	if(checkIfAllRegExpArrIsValid(urls) == false)
+	{
+		alert("Atleast one of the regular expression in the blocked url is invalid. Please use 'Validate Regular Expressions' tab to verify !");
+		return false;
+	}
+
 	var timePeriod  = $("#timeToBeBlocked").val();
 	timePeriod = convertTimePeriodStrToArray(timePeriod);
 
@@ -393,6 +399,18 @@ function editWhiteListedUrl(url)
 function addUrlToWhiteList()
 {
 	var url = $("#whiteListedURL").val() ;
+	url = url.trim();
+	if(checkIfRegExpIsValid(url) == false)
+	{
+		alert("The url contains an incorrect regular expression. Please use 'Validate Regular Expressions' tab to verify !");
+		return false;
+	}
+	if(url == ".*" || url == ".*.*")
+	{
+		alert("You cannot whitelist the entire internet ! This will always allow all the websites regarless of blocklist settings. Please choose a narrower regular expression.");
+		return false;
+	}
+
 	var allTagsToUrl = getAllLiInUl("#whiteListTagsUl");
 	storeWhiteListedUrl(url,allTagsToUrl);
 	clearWhiteListBlock();
@@ -744,6 +762,9 @@ function challengeUser(blockSetName,editOrDelete)
 	}
 }
 
+
+/* If you change this function, check if any change is needed in
+ * checkIfRegExpIsValid (utils.js) also.  */
 function validateRegExp()
 {
 	if($("#regExpUrl").val() == "")
@@ -754,7 +775,9 @@ function validateRegExp()
 	}
 
 	var regExpUrl = $("#regExpUrl").val();
+	regExpUrl = regExpUrl.trim();
 	var testUrl = $("#urlToTest").val();
+	testUrl = testUrl.trim();
 
 	$("#errorResultSpan").html("");
 	$("#matchResultSpan").html("");
@@ -763,7 +786,7 @@ function validateRegExp()
 
 	try
 	{
-		r = new RegExp(regExpUrl);
+		var r = new RegExp(regExpUrl);
 	}
 	catch(e)
 	{

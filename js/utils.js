@@ -24,11 +24,15 @@ function checkIfInArray(needle,hay,ignoreCase)
 
 function stripProtocols(url)
 {
+	return url;
+
+/* This functionality is removed as it causes surprises :) Eg www.ft.com also blocks microsoft.com !
 	url_ = url; //HH
 	url_ = url_.replace("https://","");
 	url_ = url_.replace("http://","");
 	url_ = url_.replace("www.","");
 	return url_;
+*/
 }
 
 function checkIfInArrayRegExp(needle,hay)
@@ -45,9 +49,16 @@ function checkIfInArrayRegExp(needle,hay)
 		if(curKey == null)
 			continue;
 		curKey = stripProtocols(curKey.toLowerCase());
-		if (new RegExp(curKey).exec(needle) != null)
+		if(checkIfRegExpIsValid(curKey))
 		{
-			return hay[index];
+			if (new RegExp(curKey).exec(needle) != null)
+			{
+				return hay[index];
+			}
+		}
+		else
+		{
+			console.log("Incorrect Regexp - " + curKey + ". Hence ignoring it !");
 		}
 	}
 	return false;
@@ -276,4 +287,33 @@ function replaceElemInArray(arrayObj,searchTxt,replaceTxt)
 
 	newArray = $.map(arrayObj, function(val) { return ((val == searchTxt) ? replaceTxt : val);} );
 	return newArray;
+}
+
+/* If you change this function, check if any change is needed in
+ * validateRegExp (options.js) also.  */
+function checkIfRegExpIsValid(regExpUrl)
+{
+	try
+	{
+		var r = new RegExp(regExpUrl);
+	}
+	catch(e)
+	{
+		return false;
+	}
+	return true;
+}
+
+function checkIfAllRegExpArrIsValid(regExpUrls)
+{
+	var curKey = null;
+	for(var index in regExpUrls)
+	{
+		curKey = regExpUrls[index];
+		if(curKey == null || curKey == "")
+			return false;
+		if(checkIfRegExpIsValid(curKey) == false)
+			return false;
+	}
+	return true;
 }

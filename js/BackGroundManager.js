@@ -262,20 +262,14 @@ BackGroundManager = {
 	checkIfUrlShudBeBlockedNOW : function(url) {
 		/* If the control comes here , then it means that the url is a black listed url */
 		var urlDtls = BackGroundManager.blockListDtls[url];
-		//console.log(urlDtls);
 		
 		//Lockdown check is always the first check to do.
 		console.log('calling with ' + urlDtls.blockSetName);
 		if(isBlockSetLockedDown(urlDtls.blockSetName))
 		{
-			console.log('isBlockSetLockedDown returned true');
+			console.log('LockDown is active');
 			return true;
 		}
-		else
-		{
-			console.log('isBlockSetLockedDown returned false');
-		}
-
 
 		var shudBeBlockedToday = BackGroundManager.shudUrlBeBlockedToday(url);
 		if(!shudBeBlockedToday)
@@ -405,7 +399,22 @@ BackGroundManager = {
 		var allBlockListUrls = BackGroundManager.blockList;
 		var allWhiteListUrls = BackGroundManager.whiteList;
 		var result = {};
+
+		if(url == null || url == "")
+		{
+			return { match : false }; 
+		}
+
+		if(url.search("chrome://") != -1) 
+		{
+			return { match : false }; 
+		}
 		
+		if(url.search("chrome-extension://") != -1) 
+		{
+			return { match : false }; 
+		}
+
 		// the blocked-page url (blocked.html) must be on the whiteList to avoid infinite loops
 		// chrome-extension://<random key>/blocked.html#<blocked url>
 		if(url !== null && url !== "" && url.search(/^chrome-extension:\/\/.*\/blocked.html#/) != -1) {
@@ -415,12 +424,14 @@ BackGroundManager = {
 		resultOrUrl = checkIfInArrayRegExp(url,allWhiteListUrls);
 		if(resultOrUrl !== false)
 		{
+			console.log('Going to return in wl ' + resultOrUrl);
 			return { match : true, list : 'whiteList', url : resultOrUrl} ;
 		}
 
 		resultOrUrl = checkIfInArrayRegExp(url,allBlockListUrls);
 		if(resultOrUrl !== false)
 		{
+			console.log('Going to return in bl ' + resultOrUrl);
 			return { match : true, list : 'blockList', url : resultOrUrl} ;
 		}
 		else
