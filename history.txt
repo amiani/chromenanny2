@@ -8,3 +8,5 @@
 0.98  [Sep 19 2010] - Redirect to LeechBlockish page by default (thanks Hannes!) , allow redirect to about:*, optionally hide blocked sites and other UI improvements.
 0.984 [Jan 24 2011] - Added option to limit sites by hour. Other cosmetic changes.
 0.988 [Mar 06 2011] - Added option for lockdown of blocksets.
+0.989 [May 19 2011] - Fixed bug in lockdown.
+0.990 [Jul 24 2011] - Robust handling of errorneous regexp, prevent *.* in whitelist, always allow access to Chrome internal pages, dont strip www/http from url/blocked url.

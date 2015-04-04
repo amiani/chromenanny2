@@ -1,13 +1,25 @@
 {
-	"name": "Chrome Nanny",
-	"version": "0.988",
-	"description": "Chrome Nanny allows you to be more productive and less distracted by blocking sites.",
-	"background_page": "background.html",
-	"options_page": "options.html",
-  	"permissions": ["tabs"] ,
-	"browser_action": 
-	{
-		"default_icon": "icon.png",
-		"popup": "popup.html"
-	}
+   "background": {
+      "scripts": ["js/jquery-2.1.3.min.js",
+                  "js/jquery-ui.custom.min.js",
+                  "js/utils.js",
+                  "js/StorageManager.js",
+                  "js/statCharts.js",
+                  "js/options.js",
+                  "js/BackGroundManager.js",
+                  "js/background.js"]
+      },
+   "browser_action": {
+      "default_icon": "icon.png",
+      "default_popup": "popup.html"
+   },
+   "description": "Nanny for Google Chrome (previously Chrome Nanny) allows you to be more productive and less distracted by blocking sites.",
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCreMH1qU17ugtW2wSlvQdR1t/UqYbmEkW4mStz87Rx8LaImmpPVM0X0cEHMLd9e/dNoDRAmQWIxsEW/0b4bqHFqsX4+La0N85By/EcdR6zSKp4+9/3UlC4HSuUYJp4vGdCh/mZEr2j2K+yxgTJMGOjXvYje7xiZNKNYwaDw8ONCQIDAQAB",
+   "name": "Nanny for Google Chrome (TM)",
+   "options_page": "options.html",
+   "permissions": [ "tabs" ],
+   "update_url": "http://clients2.google.com/service/update2/crx",
+   "version": "0.993",
+   "manifest_version": 2,
+   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

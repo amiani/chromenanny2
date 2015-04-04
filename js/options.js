@@ -983,5 +983,3 @@ function beginLockDown()
 	storeLockDownDtls(lockDownDtls);
 	refreshLockDownDtls();
 }
-
-
