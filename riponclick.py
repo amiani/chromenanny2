@@ -1,11 +1,10 @@
 import sys, re
 
 #finds instances of onclick in html file, rips to a new file and removes from the input
-
 path = sys.argv[1]
-infile = open(path, 'r+')
+infile = open(path, 'r')
 outfile = open("listeners.js", 'w')
-clickpatt = re.compile(r'''onclick=['"]javascript:([^"';]+)\S+''')
+clickpatt = re.compile(r'''onclick=['"]javascript:([^()"';]+)''')
 idpatt = re.compile(r'''id=["']([^"']+)''')
 
 for line in infile:
@@ -15,7 +14,6 @@ for line in infile:
 		idname = idmatch.group(1)
 		funcname = clickmatch.group(1)	
 		outfile.write("$('#"+idname+"').click("+funcname+');\n')
-		outfile.write(line.replace(clickmatch.expand(), ''))
 
 infile.close()
 outfile.close()

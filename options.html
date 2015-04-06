@@ -7,6 +7,7 @@
 
 		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
+		<script type="text/javascript" src="js/jquery-migrate-1.2.1.js"></script>
 
 		<script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
 		<script type="text/javascript" src="js/jqplot.barRenderer.min.js"></script>
@@ -179,7 +180,7 @@
 					</table>
 					<input type='button' class='GeneralButton' id='addToWhiteList' value="Save URL" />
 					<input type='button' class='GeneralButton' id='clearWhiteListTags' value="Clear Tags" />
-					<input type='button' class='GeneralButton' id='clearWhiteList' onclick="javascript:clearWhiteListBlock();" value="Clear All Fields" />
+					<input type='button' class='GeneralButton' id='clearWhiteList'  value="Clear All Fields" />
 				</div>
 				<p/>
 				<p/>
@@ -200,7 +201,7 @@
 						</tr>
 						<tr class='tDataGridElement'>
 							<td><input type = "textbox" id="tagName" size="50" maxLength = "100" />
-							<input type='button' class='GeneralButton' id='addToTags' onclick="javascript:addTag();" value="Add Tag" />
+							<input type='button' class='GeneralButton' id='addToTags'  value="Add Tag" />
 						</tr>
 					</table>
 				</div>
@@ -266,7 +267,7 @@
 						</tr>
 					</table>
 				
-					<input type='button' class='GeneralButton' id='saveGenOptions' onclick="javascript:saveGeneralOptions();" value="Save General Options" />
+					<input type='button' class='GeneralButton' id='saveGenOptions'  value="Save General Options" />
 				</div>
 			</div>
 			
@@ -275,7 +276,7 @@
 					<table border=0 nowrap cellspacing ='0' cellpadding='0' class='ModuleSection' align='center' width='100%' >
 						<tr class='tDataGridHeader'>
 							<td>LockDown Information &nbsp;
-							&nbsp;<input type='button' class='GeneralButton' id='refreshLockDownDtlsBtn' onclick='javascript:refreshLockDownDtls();' value = 'Refresh' />
+							&nbsp;<input type='button' class='GeneralButton' id='refreshLockDownDtlsBtn'  value = 'Refresh' />
 								
 							</td>
 						</tr>
@@ -288,8 +289,8 @@
 				<table id='lockDownConfigure' border=0 nowrap cellspacing ='0' cellpadding='0' class='ModuleSection' align='center' width='100%'>
 					<tr class='tDataGridHeader' >
 						<td colspan="1">Configure LockDown
-						&nbsp;<input type='button' class='GeneralButton' id='selectAllLockDownBtn' onclick='javascript:selectAllLockDown();' value = 'Select All' />
-						&nbsp;<input type='button' class='GeneralButton' id='unSelectAllLockDownBtn' onclick='javascript:unSelectAllLockDown();' value = 'UnSelect All' />
+						&nbsp;<input type='button' class='GeneralButton' id='selectAllLockDownBtn'  value = 'Select All' />
+						&nbsp;<input type='button' class='GeneralButton' id='unSelectAllLockDownBtn'  value = 'UnSelect All' />
 						</td>
 					</tr>
 					<tr class='tDataGridElement'>
@@ -302,7 +303,7 @@
 					<tr class='tDataGridElement'>
 					<td> 
 						<b>Duration:</b>&nbsp; <select id='lockDownHrs'></select> Hours <select id='lockDownMins'></select>minutes.  &nbsp; 
-						<input type='button' class='GeneralButton' id='beginLockDownBtn' onclick='javascript:beginLockDown();' value = 'Begin LockDown' />
+						<input type='button' class='GeneralButton' id='beginLockDownBtn'  value = 'Begin LockDown' />
 					</td>
 					</tr>
 
@@ -337,8 +338,8 @@
 						</tr>
 					</table>
 				
-					<input type='button' class='GeneralButton' id='validateRegExpBtn' onclick="javascript:validateRegExp();" value="Test Regular Expression" />
-					<input type='button' class='GeneralButton' id='resetRegExpFldsBtn' onclick="javascript:resetRegExpFlds();" value="Reset RegExp Fields" />
+					<input type='button' class='GeneralButton' id='validateRegExpBtn'  value="Test Regular Expression" />
+					<input type='button' class='GeneralButton' id='resetRegExpFldsBtn'  value="Reset RegExp Fields" />
 
 					<p/>
 					<p/>
@@ -427,7 +428,7 @@
 							</td>
 						</tr>
 					</table>
-					<input type="button" class='GeneralButton' id="calcCharts" name="calcCharts" onclick='javascript:plotCharts();' value='Plot !' /> 
+					<input type="button" class='GeneralButton' id="calcCharts" name="calcCharts"  value='Plot !' /> 
 				</div>
 				<div>
 					<div class="jqPlot" id="blockListChartSpace" style="height:50px; width:640px;"></div>

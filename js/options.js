@@ -169,8 +169,8 @@ function getBlockSetStr(blockSetDtls)
 	var dtlsStr = "<table border=0 nowrap cellspacing ='0' cellpadding='0' class='ModuleSection' align='center' width='95%'>";
 	var allTagsForBlockSet = getAllTagsForUrl(blockSetDtls.internalName);
 
-	var editStr =  "&nbsp;&nbsp;<button onclick='javascript:editBlockListedUrl(\"" + blockSetDtls.internalName + "\")';>Edit</button>";
-	var deleteStr =  "&nbsp;&nbsp; <button onclick='javascript:removeBlockedUrl(\"" + blockSetDtls.internalName + "\");'>Delete</button>";
+	var editStr =  "&nbsp;&nbsp;<button id='editBlockListedUrl'>Edit</button>";	
+	var deleteStr =  "&nbsp;&nbsp; <button id='removeBlockedUrl'>Delete</button>";
 	var editDeleteStr = "<span style='float:right;'>" + editStr + deleteStr + "</span>";
 
 	dtlsStr = dtlsStr + "<tr class='tDataGridHeader'><td colspan='2'>" + blockSetDtls.name + editDeleteStr + "</td></tr>";
@@ -287,6 +287,8 @@ function populateBlockSets()
 		blockSetDtls = getBlockSetDtls(blockSetName);
 		dtlsStr = getBlockSetStr(blockSetDtls);
 		$("#allBlockSetsTbl").append("<tr class='tDataGridElement'><td>" + dtlsStr + "<p/></td></tr>");
+		$('#editBlockListedUrl').click(function(){ editBlockListedUrl(blockSetDtls.internalName) });
+		$('#removeBlockedUrl').click(function(){ removeBlockedUrl(blockSetDtls.internalName) });
 	});
 	updateBlockSetsInOtherTabs();
 }
