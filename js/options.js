@@ -743,7 +743,8 @@ function verifyChallenge()
 
 function challengeUser(blockSetName,editOrDelete)
 {
-	var randomStr = getRandomStr();
+	//var randomStr = getRandomStr();
+	var randomStr = ""
 	if(randomStr == "") //Client did not want any challenge
 	{
 		if(editOrDelete == 'E')

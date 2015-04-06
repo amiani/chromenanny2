@@ -39,15 +39,15 @@ function checkIfInArrayRegExp(needle,hay)
 {
 	if(needle == null)
 		return false;
-
 	needle = stripProtocols(needle.toLowerCase());
 
 	var curKey = null;
 	for(var index in hay)
 	{
 		curKey = hay[index];
-		if(curKey == null)
+		if(curKey == null) {
 			continue;
+		}
 		curKey = stripProtocols(curKey.toLowerCase());
 		if(checkIfRegExpIsValid(curKey))
 		{

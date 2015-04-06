@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 	<title>Site Blocked</title>
 	<style type="text/css">
 		body { font-family:sans-serif; text-align:center; }
@@ -26,13 +26,6 @@
 	You can <a id="clickHere">click here</a> to access the page once the site is no longer blocked.
 	</div>
 
-	<script type="text/javascript">
-		$(function(){
-			var l=String(window.location);
-			var u=l.substr(l.indexOf('#')+1);
-			$('#blockedURL').html(u);
-			$('#clickHere').attr('href', u);
-		})
-	</script>
+	<script type="text/javascript" src="js/blocked.js"></script>
 	</body>
 </html>

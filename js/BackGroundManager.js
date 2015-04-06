@@ -260,6 +260,7 @@ BackGroundManager = {
 	},
 
 	checkIfUrlShudBeBlockedNOW : function(url) {
+		console.log("checkIfUrlShudBeBlockedNOW");
 		/* If the control comes here , then it means that the url is a black listed url */
 		var urlDtls = BackGroundManager.blockListDtls[url];
 		
@@ -282,7 +283,6 @@ BackGroundManager = {
 			if(totalTimeSpentTodayInSecs >= maxAllowedSecsInADay)
 				return true;
 		}
-
 		var survivedBasicTest = BackGroundManager.isUrlBlockedDuringCurTime(url);
 		if(survivedBasicTest)
 			return true;
@@ -292,7 +292,6 @@ BackGroundManager = {
 		var maxTime = urlDtls.maxTime;
 		if(maxTime == 0 || maxTime == null || maxTime == "")
 			return false;
-		
 		maxTime = maxTime * 60; //convert to seconds
 		var blockSetStats = {};
 
@@ -316,6 +315,7 @@ BackGroundManager = {
 	},
 
 	getTimeRemaining : function(url){
+
 		var maxMinsADay = BackGroundManager.genOptions.maxMinutesForBlockedUrls;
 		var maxAllowedSecsInADay = maxMinsADay * 60;
 		var minsLeft1 = 1440;//max possible value !
@@ -336,6 +336,7 @@ BackGroundManager = {
 		if(urlDtls == null || urlDtls == {})
 			return 0;
 		var maxTime = urlDtls.maxTime;
+		console.log("getTimeRemaining:"+maxTime)
 		var allowed = maxTime;
 		console.log('Max limit for BlockSet : ' + allowed);
 
