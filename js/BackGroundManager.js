@@ -260,7 +260,6 @@ BackGroundManager = {
 	},
 
 	checkIfUrlShudBeBlockedNOW : function(url) {
-		console.log("checkIfUrlShudBeBlockedNOW");
 		/* If the control comes here , then it means that the url is a black listed url */
 		var urlDtls = BackGroundManager.blockListDtls[url];
 		
@@ -283,33 +282,35 @@ BackGroundManager = {
 			if(totalTimeSpentTodayInSecs >= maxAllowedSecsInADay)
 				return true;
 		}
+
 		var survivedBasicTest = BackGroundManager.isUrlBlockedDuringCurTime(url);
-		if(survivedBasicTest)
-			return true;
+		if(survivedBasicTest) {
 
-		var d = new Date();
+			var d = new Date();
 
-		var maxTime = urlDtls.maxTime;
-		if(maxTime == 0 || maxTime == null || maxTime == "")
-			return false;
-		maxTime = maxTime * 60; //convert to seconds
-		var blockSetStats = {};
+			var maxTime = urlDtls.maxTime;
+			console.log(maxTime);
+			if (maxTime == 0) return true;
+			if(maxTime == null || maxTime == "")
+				return false;
+			maxTime = maxTime * 60; //convert to seconds
+			var blockSetStats = {};
 
-		if(urlDtls.maxTimeUnit == 24)
-		{
-			blockSetStats = BackGroundManager.getTotalTimeUsedByBlockSet(urlDtls.blockSetName);
-			console.log(url + "'s blockset " + urlDtls.blockSetName + ' has used ' + blockSetStats + ' seconds today but maxtime is ' + maxTime + ' every day');
-			if(blockSetStats >= maxTime)
-				return true;
+			if(urlDtls.maxTimeUnit == 24)
+			{
+				blockSetStats = BackGroundManager.getTotalTimeUsedByBlockSet(urlDtls.blockSetName);
+				console.log(url + "'s blockset " + urlDtls.blockSetName + ' has used ' + blockSetStats + ' seconds today but maxtime is ' + maxTime + ' every day');
+				if(blockSetStats >= maxTime)
+					return true;
+			}
+			else
+			{
+				blockSetStats = BackGroundManager.getTimeUsedByBlockSetForThisPeriod(urlDtls.blockSetName);
+				console.log(url + "'s blockset " + urlDtls.blockSetName + ' has used ' + blockSetStats + ' seconds but maxtime is ' + maxTime + ' mins every ' + urlDtls.maxTimeUnit + ' hours' );
+				if(blockSetStats >= maxTime)
+					return true;
+			}
 		}
-		else
-		{
-			blockSetStats = BackGroundManager.getTimeUsedByBlockSetForThisPeriod(urlDtls.blockSetName);
-			console.log(url + "'s blockset " + urlDtls.blockSetName + ' has used ' + blockSetStats + ' seconds but maxtime is ' + maxTime + ' mins every ' + urlDtls.maxTimeUnit + ' hours' );
-			if(blockSetStats >= maxTime)
-				return true;
-		}
-
 		
 		return false;
 	},
@@ -443,18 +444,6 @@ BackGroundManager = {
 
 	},
 
-	shouldUrlBeBlocked : function(url) {
-		if(BackGroundManager.checkIfUrlShudBeBlockedNOW(url))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-
-	},
-
 	getCurrentTabsUrl : function() {
 		var url = "";
 		url = chrome.tabs.getSelected(null, function (tab){
@@ -474,6 +463,7 @@ BackGroundManager = {
 	},
 
 	checkAllWindows : function(windowsArr){
+		console.log("checkAllWindows");
 		for (var i = 0; i < windowsArr.length; i++)
 		{
 			var windowObj = windowsArr[i];
@@ -482,7 +472,7 @@ BackGroundManager = {
 				var tabObj = windowObj.tabs[j];
 				var result = BackGroundManager.convertTabUrlToInternalUrl(tabObj.url);
 				//In this case, the user tries to open a blocked page during blocked time.
-				if(result.match && result.list == 'blockList' && BackGroundManager.shouldUrlBeBlocked(result.url))
+				if(result.match && result.list == 'blockList' && BackGroundManager.checkIfUrlShudBeBlockedNOW(result.url))
 				{
 					BackGroundManager.blockPage(result.url,tabObj.id);
 				}
@@ -627,7 +617,7 @@ BackGroundManager = {
 
 		var result = BackGroundManager.convertTabUrlToInternalUrl(url);
 		//In this case, the use tries to open a blocked page during blocked time.
-		if(result.match && result.list == 'blockList' && BackGroundManager.shouldUrlBeBlocked(result.url))
+		if(result.match && result.list == 'blockList' && BackGroundManager.checkIfUrlShudBeBlockedNOW(result.url))
 		{
 			BackGroundManager.blockPage(result.url,tabId);
 		}
