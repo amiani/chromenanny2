@@ -1,5 +1,3 @@
-//gig
-
 function isBlockSetsNotPresent()
 {
 	var allBlockSets = localStorage.getItem("allBlockSets");
@@ -15,7 +13,7 @@ function validateIfUrlsAreUnique(blockSetDtls)
 		if(getNumElemsInHash(urlDtls) > 0)
 		{
 			if(urlDtls.blockSetName != blockSetDtls.internalName)
-	       			result = false;
+	       		result = false;
 		}
 	});
 	return result;
@@ -59,8 +57,7 @@ function storeBlockedUrl(urlDtls)
 function getAllBlockSets()
 {
 	var allBlockSets = localStorage.getItem("allBlockSets");
-	var retVal = (allBlockSets == null)? [] : JSON.parse(allBlockSets);
-	return retVal;
+	return (allBlockSets == null) ? [] : JSON.parse(allBlockSets);
 }
 
 function getAllBlockedUrls()
@@ -68,16 +65,15 @@ function getAllBlockedUrls()
 	var allBlockedUrlsStr = localStorage.getItem("blockedUrls");
 	if(allBlockedUrlsStr == null)
 		return [];
-	var allBlockedUrlsArr = JSON.parse(allBlockedUrlsStr);
-	return allBlockedUrlsArr;
+	return JSON.parse(allBlockedUrlsStr);
 }
 
 function getBlockSetDtls(blockSetName)
 {
-	var blockSetDtls = {} , blockSetDtlsStr = "";
+	var blockSetDtls = {};
 	if(blockSetName == null) return blockSetDtls;
 
-	blockSetDtlsStr = localStorage.getItem(blockSetName);
+	var blockSetDtlsStr = localStorage.getItem(blockSetName);
 	if(blockSetDtlsStr == null) return blockSetDtls;
 	blockSetDtls = JSON.parse(blockSetDtlsStr);
 	return blockSetDtls;
@@ -97,9 +93,8 @@ function getAllBlockedUrlDtls()
 	var allBlockedUrlsArr= getAllBlockedUrls();
 	var allBlockedUrlDtlsHash= {}; 
 	var url = "";
-	for(var urlIndex in allBlockedUrlsArr)
-	{
-		var url = allBlockedUrlsArr[urlIndex];
+	for(var urlIndex in allBlockedUrlsArr) {
+		url = allBlockedUrlsArr[urlIndex];
 		if(url == "" || url == null) continue;
 		var urlDtls = localStorage.getItem(url);
 		if(urlDtls != null)
@@ -259,7 +254,7 @@ function getUrlsForTag(tagName)
 	var tagUrls = [];
 	if(tagName == null)
 		return tagUrls;
-	tagUrlsStr = localStorage.getItem(tagName);
+	var tagUrlsStr = localStorage.getItem(tagName);
 	if(tagUrlsStr == null)
 		return tagUrls;
 	return JSON.parse(tagUrlsStr);
@@ -423,7 +418,6 @@ function migrateHrLimitsIfNecessary()
 	var blockSetDtls = null, tagsForBlockSet = null;
 	var allBlockSetsArr = getAllBlockSets();
 	$.each(allBlockSetsArr, function(key,blockSetName){
-		blockSetDtls = {};
 		blockSetDtls = getBlockSetDtls(blockSetName);
 		blockSetDtls.maxTimeUnit = 24;
 		tagsForBlockSet = getAllTagsForUrl(blockSetName);

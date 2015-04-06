@@ -51,7 +51,7 @@ function addBlockSet()
 
 	if(!validateIfUrlsAreUnique(blockSetDtls))
 	{
-		alert('An URL can belong to only one Block Set. Please remove the duplicate URL from this Block Set');
+		alert('A URL can belong to only one Block Set. Please remove the duplicate URL from this Block Set');
 		return false;
 	}
 

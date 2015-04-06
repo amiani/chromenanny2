@@ -274,7 +274,6 @@ BackGroundManager = {
 		var shudBeBlockedToday = BackGroundManager.shudUrlBeBlockedToday(url);
 		if(!shudBeBlockedToday)
 			return false;
-	
 		var totalTimeSpentTodayInSecs = BackGroundManager.getTimeUsedForAllBlockedURLs();
 		var maxAllowedSecsInADay = BackGroundManager.genOptions.maxMinutesForBlockedUrls * 60;
 		if(maxAllowedSecsInADay > 0)
@@ -285,11 +284,9 @@ BackGroundManager = {
 
 		var survivedBasicTest = BackGroundManager.isUrlBlockedDuringCurTime(url);
 		if(survivedBasicTest) {
-
 			var d = new Date();
 
 			var maxTime = urlDtls.maxTime;
-			console.log(maxTime);
 			if (maxTime == 0) return true;
 			if(maxTime == null || maxTime == "")
 				return false;
@@ -306,7 +303,7 @@ BackGroundManager = {
 			else
 			{
 				blockSetStats = BackGroundManager.getTimeUsedByBlockSetForThisPeriod(urlDtls.blockSetName);
-				console.log(url + "'s blockset " + urlDtls.blockSetName + ' has used ' + blockSetStats + ' seconds but maxtime is ' + maxTime + ' mins every ' + urlDtls.maxTimeUnit + ' hours' );
+				console.log(url + "'s blockset " + urlDtls.blockSetName + ' has used ' + blockSetStats + ' seconds but maxtime is ' + maxTime + ' secs every ' + urlDtls.maxTimeUnit + ' hours' );
 				if(blockSetStats >= maxTime)
 					return true;
 			}
